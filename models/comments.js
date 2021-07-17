@@ -1,3 +1,5 @@
+const formatTime = require('../utils/moments')
+
 module.exports = (sequelize, DataTypes) => {
     const Comment = sequelize.define('comments', {
         commentId: {
@@ -13,10 +15,12 @@ module.exports = (sequelize, DataTypes) => {
 
             get() { return formatTime(this) }
         }
-    }, {
-        charset: 'utf8mb4',
-        collate: 'utf8mb4_general_ci'
     })
+
+    Comment.associate = models => {
+        Comment.belongsTo(models.User, { foreignKey: 'nickname', targetKey: 'nickname'})
+        Comment.belongsTo(models.Post, { foreignKey: 'postId', targetKey: 'postId'})
+    }
 
     return Comment
     

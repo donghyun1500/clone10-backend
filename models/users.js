@@ -1,4 +1,4 @@
-const formatTime = require('../utils/moments.js')
+const formatTime = require('../utils/moments')
 const crypto = require('../utils/crypto')
 
 
@@ -29,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       get() {return formatTime(this) }
     }
   })
+
+  User.associate = models => {
+    User.hasMany(models.Post, { foreignKey: 'nickname', sourceKey: 'nickname'})
+    User.hasMany(models.Comment, { foreignKey: 'nickname', sourceKey: 'nickname'})
+  }
 
   return User
 

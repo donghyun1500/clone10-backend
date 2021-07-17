@@ -14,4 +14,8 @@ db.User = User(sequelize, dataTypes);
 db.Post = Post(sequelize, dataTypes);
 db.Comment = Comment(sequelize, dataTypes);
 
+db.User.associate(db);
+db.Post.associate(db);
+db.Comment.associate(db);
+
 module.exports = db
